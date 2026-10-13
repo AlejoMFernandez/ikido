@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>iKidO · Prototipo</title>
+<meta name="description" content="Prototipo interactivo de iKidO: misiones de la vida real, monedas y premios para chicos.">
+<meta name="theme-color" content="#101A55">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="iKidO">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:title" content="iKidO · Prototipo">
+<meta property="og:description" content="Cada tarea es una misión. Cada misión da monedas. Las monedas abren tesoros.">
+<meta property="og:image" content="img/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css?v=2">
+</head>
+<body>
+<div class="stage">
+  <aside class="side" aria-label="Panel de la demo">
+    <div class="side-logo"><span>iKid</span><i class="coin-o" aria-hidden="true"><b>GG</b></i></div>
+    <p class="side-lead">Prototipo interactivo. Probalo como si fueras el chico y como si fueras la mamá: lo que hace uno le llega al otro.</p>
+    <ol class="side-steps">
+      <li>Entrá como <b>Gero</b> y tocá la misión que brilla en el mapa.</li>
+      <li>Pasá a <b>Mamá</b> y sellá la misión.</li>
+      <li>Volvé a Gero: le llueven las monedas.</li>
+      <li>Abrí un cofre en el <b>Tesoro</b>.</li>
+    </ol>
+    <div class="side-btns">
+      <button class="side-btn" data-action="as-kid">Ver como Gero</button>
+      <button class="side-btn" data-action="as-parent">Ver como Mamá</button>
+    </div>
+    <div class="side-btns">
+      <button class="side-btn ghost" data-action="toggle-sound" data-sound-label>Sonido: activado</button>
+      <button class="side-btn ghost" data-action="reset">Reiniciar demo</button>
+    </div>
+    <p class="side-note">En el celular se puede agregar a la pantalla de inicio para usarlo como app.</p>
+    <p class="credit">Prototipo desarrollado por <a href="https://alejomfernandez.com.ar" target="_blank" rel="noopener">Alejo Martín Fernández</a></p>
+  </aside>
+  <div class="phone-wrap">
+    <div class="phone" id="phone">
+      <div id="app" class="app"></div>
+    </div>
+  </div>
+</div>
+<script src="js/sound.js?v=2"></script>
+<script src="js/kido.js?v=2"></script>
+<script src="js/confetti.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
+</body>
+</html>
