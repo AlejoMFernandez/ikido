@@ -4,9 +4,15 @@ Prototipo navegable de la app iKidO (misiones de la vida real, monedas y premios
 HTML + CSS + JS puros, sin dependencias ni build. Los sonidos se generan en el navegador (Web Audio).
 
 ## Qué se puede probar
-- **Gero (chico):** mapa de misiones, «¡La hice!», pantalla de misión cumplida, lluvia de monedas cuando mamá sella, subida de nivel, Tesoro con cofre que se abre, cofre del día y Logros.
-- **Laura (mamá):** familia, revisar y sellar misiones, marcar premios como entregados, crear una misión nueva (aparece en el mapa de Gero).
-- Lo que hace un perfil le llega al otro. El progreso se guarda en el navegador; «Reiniciar demo» vuelve todo a cero.
+Arranca **vacío**: no hay familia, chicos, misiones ni premios cargados. Todo se crea desde la app.
+
+1. **Adulto:** bienvenida guiada (nombre, mamá/papá, apellido → código de familia → primer hijo con su Kido en huevo y su código secreto). En Familia hay una lista de «Primeros pasos».
+2. **Misiones:** con ideas sugeridas, para un hijo, con monedas y repetición semanal o solo hoy.
+3. **Premios:** el adulto los carga (con ideas sugeridas) y aparecen en el Tesoro del chico.
+4. **Chico:** entra con código de familia + código secreto, cumple misiones en el mapa, recibe la lluvia de monedas cuando el adulto sella, su Kido nace del huevo al subir de nivel, abre el cofre del día, pide premios y, si el adulto los aprueba, abre el cofre. Si el adulto dice «todavía no», le llega el motivo (y las monedas vuelven en el caso de los premios).
+5. El adulto ve el historial de monedas de cada hijo y puede agregar más hijos.
+
+El progreso se guarda en el navegador de cada persona. «Empezar de cero» borra todo.
 
 ## Probar en local
 Abrir con cualquier servidor estático (por ejemplo XAMPP: `http://localhost/2 - CLIENTES/iKid0/prototipo/`).
