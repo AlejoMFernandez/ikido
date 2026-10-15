@@ -518,3 +518,5 @@ button.fs{border-color:var(--tinta);box-shadow:0 3px 0 var(--tinta)}
 button.fs:active{transform:translateY(2px)}
 .pitem .del{width:34px;height:34px;flex-shrink:0;border-radius:10px;border:2px solid var(--tinta);display:grid;place-items:center;background:#fff}
 .sheet .sugs{margin-left:-4px;margin-right:-4px}
+.onb-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.onb-top .dots{flex:1}

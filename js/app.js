@@ -818,7 +818,8 @@
         <div class="bigcode" style="font-size:30px">${k.code}<button class="copy" data-action="copy" data-text="${k.code}" aria-label="Copiar código">${ic('copy', { size: 20 })}</button></div></div>
       <button class="btn3d oro" data-action="onb-done">Ir a mi familia</button>`;
     }
-    mount(`<div class="dots">${dots}</div>${body}`, 'parent onb', anim || 'in-right');
+    const back = step < 5 ? `<button class="back" data-action="onb-back" data-step="${step}" aria-label="Volver">${ic('back', { size: 20, sw: 3.5 })}</button>` : '<span style="width:46px"></span>';
+    mount(`<div class="onb-top">${back}<div class="dots">${dots}</div><span style="width:46px"></span></div>${body}`, 'parent onb', anim || 'in-right');
     if (step === 5) setTimeout(() => {
       const h = $('#hatch'); if (!h) return;
       h.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-12deg)' }, { transform: 'rotate(12deg)' }, { transform: 'rotate(0)' }], { duration: 500, iterations: 3 });
@@ -833,7 +834,7 @@
       if (!onb.last) { sfx('nope'); shake(ln); ln.focus(); return; }
       if (!S.family) S.family = { code: '' };
       S.family.parentName = cap(onb.name); S.family.role = onb.role; S.family.last = cap(onb.last);
-      if (!S.family.code) S.family.code = genCode(onb.last, 3);
+      if (!S.family.code || !S.kids.length) S.family.code = genCode(onb.last, 3);
       save();
     }
     if (step === 4) {
@@ -841,6 +842,7 @@
       onb.kid = kn.value.trim();
       if (!onb.kid) { sfx('nope'); shake(kn); kn.focus(); return; }
       if (!S.kids.length) S.kids.push(newKid(cap(onb.kid), onb.color));
+      else if (S.kids.length === 1 && !S.kids[0].missions.length) { S.kids[0].name = cap(onb.kid); S.kids[0].color = onb.color; }
       save();
       sfx('success');
     } else sfx('tap');
@@ -1167,6 +1169,7 @@
       <div class="scroll"><div class="plist">
         ${S.kids.map(k => `<button class="pitem" data-action="enter-kid" data-kid="${k.id}" style="text-align:left"><div class="ri" style="background:${KCOLORS[k.color]};overflow:hidden">${kidSvg(k)}</div><b>Entrar como ${esc(k.name)}</b>${ic('chev', { size: 20, sw: 3 })}</button>`).join('')}
         <button class="pitem" data-action="toggle-sound" style="text-align:left"><div class="ri" style="background:#FFC928">${ic(Sound.isMuted() ? 'mute' : 'sonido')}</div><b data-sound-label>${Sound.isMuted() ? 'Sonido: apagado' : 'Sonido: activado'}</b></button>
+        <button class="pitem" data-action="logout" style="text-align:left"><div class="ri" style="background:#C8F1FF">${ic('back')}</div><b>Volver al inicio</b></button>
         <button class="pitem" data-action="reset" style="text-align:left"><div class="ri" style="background:#FFE0E8">${ic('reset')}</div><b>Borrar todo y empezar de cero</b></button>
       </div>
       <p class="credit" style="color:#4A4F72;text-align:center;margin:10px 18px 20px">Prototipo desarrollado por <a href="https://alejomfernandez.com.ar" target="_blank" rel="noopener" style="color:#0A0F33;font-weight:900">Alejo Martín Fernández</a></p>
@@ -1211,7 +1214,7 @@
       <div style="display:flex;flex-direction:column;gap:14px">
         ${S.kids.map(x => `<button class="btn3d ${k && x.id === k.id ? 'oro' : 'blanco'} sm" data-action="enter-kid" data-kid="${x.id}">${esc(x.name)}${k && x.id === k.id ? ' (estás acá)' : ''}</button>`).join('')}
         <button class="btn3d blanco sm" data-action="as-parent">${esc(S.family ? S.family.parentName : 'Adulto')} (${esc(S.family && S.family.role !== 'otro' ? S.family.role : 'adulto')})</button>
-        <div class="row"><button class="btn3d blanco sm" data-action="toggle-sound" data-sound-label style="font-size:16px">${Sound.isMuted() ? 'Sonido: no' : 'Sonido: sí'}</button><button class="btn3d blanco sm" data-action="reset" style="font-size:16px">Empezar de cero</button></div>
+        <div class="row"><button class="btn3d blanco sm" data-action="toggle-sound" data-sound-label style="font-size:16px">${Sound.isMuted() ? 'Sonido: no' : 'Sonido: sí'}</button><button class="btn3d blanco sm" data-action="logout" style="font-size:16px">Volver al inicio</button></div>
       </div>`);
   }
 
@@ -1288,6 +1291,15 @@
         ptab = nt; sfx('tab'); renderParent(dir); break;
       }
       case 'onb-next': onbNext(+el.dataset.step); break;
+      case 'onb-back': {
+        const st = +el.dataset.step;
+        const pn = $('#pn'), ln = $('#ln'), kn = $('#kn');
+        if (pn) onb.name = pn.value; if (ln) onb.last = ln.value; if (kn) onb.kid = kn.value;
+        sfx('back');
+        if (st <= 1) renderSplash(); else renderOnboarding(st - 1, 'in-left');
+        break;
+      }
+      case 'logout': sfx('back'); closeSheet(true); renderSplash(); break;
       case 'onb-role': { const pn = $('#pn'), ln = $('#ln'); if (pn) onb.name = pn.value; if (ln) onb.last = ln.value; onb.role = el.dataset.v; sfx('tap'); el.parentElement.querySelectorAll('.pick').forEach(p => p.classList.toggle('on', p === el)); break; }
       case 'onb-color': { const kn = $('#kn'); if (kn) onb.kid = kn.value; onb.color = el.dataset.c; sfx('pop'); el.parentElement.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === el)); break; }
       case 'onb-done': sfx('success'); ptab = 'familia'; renderFamilia('in-up'); setTimeout(() => toast({ tip: true, title: '¡Familia creada!', text: 'Seguí los «Primeros pasos» para probar todo el circuito.' }, 3600), 500); break;
