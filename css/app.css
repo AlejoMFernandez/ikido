@@ -520,3 +520,74 @@ button.fs:active{transform:translateY(2px)}
 .sheet .sugs{margin-left:-4px;margin-right:-4px}
 .onb-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .onb-top .dots{flex:1}
+
+/* ============ v4: arreglos para celulares reales ============ */
+html,body{touch-action:manipulation}
+.stage{height:100vh;height:100dvh}
+@media (max-width:760px){.phone-wrap,.phone{height:100vh;height:100dvh}}
+/* los avisos nunca bloquean toques */
+.toast{pointer-events:none}
+/* pantallas sin lista propia: ahora se pueden deslizar */
+.screen.splash,.screen.join,.screen.onb{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}
+.screen.splash::-webkit-scrollbar,.screen.join::-webkit-scrollbar,.screen.onb::-webkit-scrollbar{display:none}
+.screen.splash{justify-content:flex-start;padding-top:calc(var(--safe-top) + 10px);padding-bottom:calc(var(--safe-bottom) + 10px)}
+.splash .logo{margin-top:auto}
+.splash .who{margin-bottom:auto}
+.splash .credit{position:static;margin-top:18px;flex-shrink:0}
+.screen.join{justify-content:flex-start}
+.join>*{flex-shrink:0}
+.join .back-k{margin-bottom:auto}
+.join .demo-chip{margin-bottom:auto}
+.onb>*{flex-shrink:0}
+.onb .hero{flex:1 0 auto;padding:6px 0}
+.onb .btn3d{margin-top:10px}
+/* hojas que suben desde abajo: nunca más altas que la pantalla */
+.sheet{max-height:calc(100% - var(--safe-top) - 16px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sheet::-webkit-scrollbar{display:none}
+.sheet-icon{margin:0 auto 8px}
+.sheet-x{position:sticky;top:0;float:right;margin:-6px -6px 0 0;z-index:2}
+/* superposiciones en pantallas bajas */
+.overlay{overflow-y:auto;overflow-x:hidden}
+@media (max-height:760px){
+  .ov-title{font-size:50px;margin-top:calc(var(--safe-top) + 14px)}
+  .ov-kido{width:180px;height:180px;margin-top:4px}
+  .badge-plus{width:90px;height:90px;top:calc(var(--safe-top) + 130px);right:18px}
+  .badge-plus b{font-size:30px}
+  .ov-card{padding:12px 14px;margin-bottom:12px}
+  .ov-card h3{font-size:20px}
+  .ov-card p{font-size:14px}
+  .btn3d{height:56px;font-size:22px}
+  .chest-big{width:200px;height:170px;margin-left:-100px;top:48%}
+  .prize{width:160px;margin-left:-80px}
+  .prize .ico{width:80px;height:80px}
+  .prize b{font-size:23px}
+  .ov-chest.opened .prize{transform:translateY(-190px) rotate(6deg) scale(1)}
+  .ov-foot p{font-size:15px}
+  .ov-level .lv-num{font-size:90px}
+  .ov-level .lv-kido{width:160px;height:160px}
+  .splash .logo{font-size:72px}
+  .splash .coin-o{width:64px;height:64px}
+  .splash .kd{width:130px;height:130px}
+  .who .btn3d{height:68px}
+  .join .kd{width:110px;height:110px}
+  .onb .kd{width:130px;height:130px}
+  .onb h1{font-size:28px}
+  .onb .steps div{padding:8px 10px;font-size:14px}
+  .bigcode{font-size:30px;padding:10px 14px}
+  .kid-empty .ke-kido{width:150px;height:150px}
+}
+@media (max-height:640px){
+  .ov-title{font-size:42px}
+  .ov-kido{width:140px;height:140px}
+  .badge-plus{top:calc(var(--safe-top) + 100px)}
+  .chest-big{top:44%}
+  .ov-chest.opened .prize{transform:translateY(-160px) rotate(6deg) scale(.9)}
+}
+.sheet .row .btn3d{font-size:18px;padding:0 10px;white-space:nowrap}
+@media (max-height:700px){
+  .ov-level{gap:6px;justify-content:flex-start;padding-top:calc(var(--safe-top) + 20px)}
+  .ov-level .lv-txt{font-size:30px}
+  .ov-level .lv-num{font-size:70px}
+  .ov-level .lv-kido{width:130px;height:130px}
+  .ov-level p{margin:0 24px 10px;font-size:15px}
+}
