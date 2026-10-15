@@ -38,7 +38,7 @@
          </g>`
       : `<g class="k-arms">
            <ellipse cx="32" cy="130" rx="13" ry="21" transform="rotate(35 32 130)" fill="${c.body}" stroke="${INK}" stroke-width="5"/>
-           <ellipse class="k-arm-wave" cx="168" cy="130" rx="13" ry="21" transform="rotate(-35 168 130)" fill="${c.body}" stroke="${INK}" stroke-width="5"/>
+           <g class="k-arm-wave"><ellipse cx="168" cy="130" rx="13" ry="21" transform="rotate(-35 168 130)" fill="${c.body}" stroke="${INK}" stroke-width="5"/></g>
          </g>`;
     let eyes = '';
     let mouth = '';
